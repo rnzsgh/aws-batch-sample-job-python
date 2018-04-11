@@ -6,7 +6,7 @@ def main():
     is provided as an environment variable. """
     print 'Hello world'
 
-    print 'Generating test data'
+    print 'Generate test data locally'
     with open('output_file', 'wb') as fout:
         fout.write(os.urandom(49152))
         fout.close()
@@ -17,6 +17,8 @@ def main():
     with open('output_file', 'rb') as data:
         s3_client.Bucket(os.environ['S3_BUCKET_NAME']).put_object(Key='output_file', Body=data)
         data.close()
+
+    print 'Done'
 
 if __name__ == '__main__':
     main()
