@@ -1,0 +1,21 @@
+{
+    "jobDefinitionName": "",
+    "type": "container",
+    "containerProperties": {
+        "image": "",
+        "vcpus": 2,
+        "memory": 2000,
+        "jobRoleArn": "",
+        "environment": [
+            {
+                "name": "S3_BUCKET_NAME",
+                "value": "@S3_BUCKET_NAME@"
+            }
+        ],
+        "readonlyRootFilesystem": false,
+        "privileged": true
+    },
+    "retryStrategy": {
+        "attempts": 3
+    }
+}

@@ -1,0 +1,22 @@
+---
+version: 0.2
+phases:
+  install:
+    commands:
+      - apt-get update && apt-get -y install python-pip jq && pip install --upgrade python && pip install --upgrade awscli
+  pre_build:
+      commands:
+      - printenv
+      - TAG="$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+      - $(aws ecr get-login --no-include-email)
+  build:
+    commands:
+      - docker build --tag $REPOSITORY_URI:$TAG .
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:$TAG
+      - cat batch-job-definition.json | jq ".jobDefinitionName=\"$JOB_DEFINITION_NAME\" | .containerProperties.jobRoleArn=\"$JOB_DEFINITION_ROLE_ARN\" | .containerProperties.environment[0].value=\"$S3_BUCKET_NAME\"" > /tmp/job.json
+      - aws batch register-job-definition --cli-input-json file:///tmp/job.json
+
+artifacts:
+  files: build.json
