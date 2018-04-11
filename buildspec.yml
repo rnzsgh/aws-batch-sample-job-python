@@ -15,8 +15,5 @@ phases:
   post_build:
     commands:
       - docker push $REPOSITORY_URI:$TAG
-      - cat batch-job-definition.json | jq ".jobDefinitionName=\"$JOB_DEFINITION_NAME\" | .containerProperties.jobRoleArn=\"$JOB_DEFINITION_ROLE_ARN\" | .containerProperties.environment[0].value=\"$S3_BUCKET_NAME\"" > /tmp/job.json
+      - cat batch-job-definition.json | jq ".jobDefinitionName=\"$JOB_DEFINITION_NAME\" | .containerProperties.jobRoleArn=\"$JOB_DEFINITION_ROLE_ARN\" | .containerProperties.environment[0].value=\"$S3_BUCKET_NAME\" | .containerProperties.image=\"$REPOSITORY_URI:$TAG\"" > /tmp/job.json
       - aws batch register-job-definition --cli-input-json file:///tmp/job.json
-
-artifacts:
-  files: build.json
