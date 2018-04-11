@@ -9,7 +9,7 @@
         "environment": [
             {
                 "name": "S3_BUCKET_NAME",
-                "value": "@S3_BUCKET_NAME@"
+                "value": ""
             }
         ],
         "readonlyRootFilesystem": false,
