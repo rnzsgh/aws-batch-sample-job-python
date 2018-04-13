@@ -18,6 +18,8 @@ def main():
         s3_client.Bucket(os.environ['S3_BUCKET_NAME']).put_object(Key='output_file', Body=data)
         data.close()
 
+    print 'I changed something'
+
     print 'Done'
 
 if __name__ == '__main__':
