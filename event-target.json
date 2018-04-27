@@ -7,13 +7,7 @@
       "RoleArn": "",
       "BatchParameters": {
         "JobDefinition": "",
-        "JobName": "",
-        "ArrayProperties": {
-          "Size": 0
-        },
-        "RetryStrategy": {
-          "Attempts": 1
-        }
+        "JobName": ""
       }
     }
   ]
