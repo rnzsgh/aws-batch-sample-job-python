@@ -2,10 +2,8 @@ import boto3, os, logging
 
 def main():
 
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
     logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-    logger.addHandler(logging.StreamHandler(sys.stdout))
-
 
     """ A very simple test that showcases generating random data and then writing it to
     an S3 bucket. Your container must have permission to write to the S3 bucket that
