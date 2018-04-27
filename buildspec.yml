@@ -20,6 +20,6 @@ phases:
       - echo $JOB_DEF_ARN
       - RULE_ARN=$(aws events put-rule --name $JOB_DEFINITION_NAME --schedule-expression "cron(0/5 * * * ? *)" --state ENABLED | jq '.RuleArn')
       - echo $RULE_ARN
-      - cat event-target.json | jq ".Rule=$JOB_DEFINITION_NAME | .Targets[0].BatchParameters.JobDefinition=$JOB_DEF_ARN | .Targets[0].RoleArn=\"$CLOUDWATCH_EVENTS_SUBMIT_BATCH_JOB_ROLE\" | .Targets[0].Id=\"$JOB_DEFINITION_NAME\" | .Targets[0].Arn=\"$JOB_QUEUE_ARN\"" > /tmp/event-target.json
+      - cat event-target.json | jq ".Rule=\"$JOB_DEFINITION_NAME\" | .Targets[0].BatchParameters.JobDefinition=$JOB_DEF_ARN | .Targets[0].RoleArn=\"$CLOUDWATCH_EVENTS_SUBMIT_BATCH_JOB_ROLE\" | .Targets[0].Id=\"$JOB_DEFINITION_NAME\" | .Targets[0].Arn=\"$JOB_QUEUE_ARN\"" > /tmp/event-target.json
       - cat /tmp/event-target.json
       - aws events put-targets --cli-input-json file:///tmp/event-target.json
