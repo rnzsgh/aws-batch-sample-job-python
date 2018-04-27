@@ -17,6 +17,6 @@ phases:
       - docker push $REPOSITORY_URI:$TAG
       - cat batch-job-definition.json | jq ".jobDefinitionName=\"$JOB_DEFINITION_NAME\" | .containerProperties.jobRoleArn=\"$JOB_DEFINITION_ROLE_ARN\" | .containerProperties.environment[0].value=\"$S3_BUCKET_NAME\" | .containerProperties.image=\"$REPOSITORY_URI:$TAG\"" > /tmp/job.json
       - JOB_DEF_ARN=$(aws batch register-job-definition --cli-input-json file:///tmp/job.json | jq '.jobDefinitionArn')
-      - RULE_ARN=$(aws events put-rule --name $JOB_DEFINITION_NAME --schedule-expression "cron(0/1 * * * ? *)" --state ENABLED | jq '.RuleArn')
+      - RULE_ARN=$(aws events put-rule --name $JOB_DEFINITION_NAME --schedule-expression "cron(0/2 * * * ? *)" --state ENABLED | jq '.RuleArn')
       - cat event-target.json | jq ".Rule=\"$JOB_DEFINITION_NAME\" | .Targets[0].BatchParameters.JobDefinition=$JOB_DEF_ARN | .Targets[0].BatchParameters.JobName=\"$JOB_DEFINITION_NAME\" | .Targets[0].RoleArn=\"$CWE_SUBMIT_BATCH_JOB_ROLE_ARN\" | .Targets[0].Id=\"$JOB_DEFINITION_NAME\" | .Targets[0].Arn=\"$JOB_QUEUE_ARN\"" > /tmp/event-target.json
       - aws events put-targets --cli-input-json file:///tmp/event-target.json
