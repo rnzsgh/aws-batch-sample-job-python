@@ -10,7 +10,7 @@ def main():
     an S3 bucket. Your container must have permission to write to the S3 bucket that
     is provided as an environment variable. """
     logger.info('Hello world - batch')
-    print 'huh'
+    print 'huh - what is this?'
 
     logger.info('Generate test data locally')
     with open('output_file', 'wb') as fout:
