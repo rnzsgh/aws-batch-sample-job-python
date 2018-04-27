@@ -4,7 +4,7 @@ def main():
     """ A very simple test that showcases generating random data and then writing it to
     an S3 bucket. Your container must have permission to write to the S3 bucket that
     is provided as an environment variable. """
-    print 'Hello world'
+    print 'Hello world - batch'
 
     print 'Generate test data locally'
     with open('output_file', 'wb') as fout:
