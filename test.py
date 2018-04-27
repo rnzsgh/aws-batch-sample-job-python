@@ -2,7 +2,7 @@ import boto3, os, sys, logging
 
 def main():
 
-    FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
+    FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=FORMAT)
     logger = logging.getLogger(__name__)
 
