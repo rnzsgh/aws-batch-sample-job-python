@@ -2,7 +2,8 @@ import boto3, os, logging
 
 def main():
 
-    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+    FORMAT = '%(asctime)-15s %(clientip)s %(user)-8s %(message)s'
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO, format=FORMAT)
     logger = logging.getLogger(__name__)
 
     """ A very simple test that showcases generating random data and then writing it to
