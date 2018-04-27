@@ -2,7 +2,7 @@ import boto3, os, logging
 
 def main():
 
-    logger = logging.getLogger()
+    logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
     """ A very simple test that showcases generating random data and then writing it to
