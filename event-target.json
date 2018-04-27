@@ -1,0 +1,20 @@
+{
+  "Rule": "",
+  "Targets": [
+    {
+      "Id": "",
+      "Arn": "",
+      "RoleArn": "",
+      "BatchParameters": {
+        "JobDefinition": "",
+        "JobName": "",
+        "ArrayProperties": {
+          "Size": 0
+        },
+        "RetryStrategy": {
+          "Attempts": 1
+        }
+      }
+    }
+  ]
+}
