@@ -19,5 +19,4 @@ phases:
       - JOB_DEF_ARN=$(aws batch register-job-definition --cli-input-json file:///tmp/job.json | jq '.jobDefinitionArn')
       - RULE_ARN=$(aws events put-rule --name $JOB_DEFINITION_NAME --schedule-expression "cron(0/5 * * * ? *)" --state ENABLED | jq '.RuleArn')
       - cat event-target.json | jq ".Rule=\"$JOB_DEFINITION_NAME\" | .Targets[0].BatchParameters.JobDefinition=$JOB_DEF_ARN | .Targets[0].BatchParameters.JobName=\"$JOB_DEFINITION_NAME\" | .Targets[0].RoleArn=\"$CWE_SUBMIT_BATCH_JOB_ROLE_ARN\" | .Targets[0].Id=\"$JOB_DEFINITION_NAME\" | .Targets[0].Arn=\"$JOB_QUEUE_ARN\"" > /tmp/event-target.json
-      - cat /tmp/event-target.json
       - aws events put-targets --cli-input-json file:///tmp/event-target.json
